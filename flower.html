@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo 3D con Estrellas Ascendentes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <!-- 🌫 Neblina -->
+  <img src="img/jjj.png" alt="Nubes o Neblina" class="neblinaa-imagen">
+  <img src="img/jjk.png" alt="Nubes o Neblina" class="neblina-imagen">
+
+  <!-- ✨ Texto Neon -->
+  <div class="neon-text-container">
+    <div class="neon-text" role="button" tabindex="0">¡Click<br>Me!</div>
+  </div>
+
+    <!-- 🌌 Ventana Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-window">
+
+
+    <!-- Contenedor Principal de la Interfaz -->
+    <div id="app-container" class="text-white flex flex-col items-center justify-center w-full max-w-sm mx-auto space-y-6">
+
+        <!-- Mensaje de Encabezado -->
+<!-- Mensaje de Encabezado -->
+<div class="text-center font-bold leading-snug font-congenial" style="font-family: 'Comic Sans MS', 'Comic Sans', cursive;">
+  <p class="text-3xl">¡Te regalo esta flor morada!</p>
+  <div class="text-5xl mt-2 animate-bounce">
+    <span role="img" aria-label="Flor morada">🪻</span>
+  </div>
+</div>
+
+
+        <!-- Tarjeta del Reproductor de Música (Efecto Glassmorphism) -->
+        <div class="bg-black/20 backdrop-blur-md rounded-3xl p-6 shadow-2xl w-full space-y-6 border border-white/20">
+
+            <!-- Portada del Álbum (Placeholder) -->
+            <div class="aspect-square bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                <!-- Usando una imagen placeholder para simular la portada de 'Perfect' de Ed Sheeran -->
+                <img id="album-art" src="cancion.jpeg" 
+                     alt="Portada del álbum Perfect de Ed Sheeran (Placeholder)"
+                     class="w-full h-full object-cover rounded-xl"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x400/3B82F6/FFFFFF?text=Música';"
+                >
+            </div>
+
+            <!-- Información de la Canción -->
+            <div class="text-center">
+              <h2 id="song-title" class="text-3xl font-bold text-white/80 drop-shadow-lg tracking-wide" style="font-family: 'Comic Sans MS', 'Comic Sans', cursive;">Perfect</h2>
+                <p id="artist-name" class="text-white/70 text-lg">Alex Campos</p>
+            </div>
+
+            <!-- Barra de Progreso y Tiempos -->
+<div class="space-y-2 w-full">
+  <input 
+    type="range" 
+    min="0" 
+    max="43" 
+    value="1" 
+    step="0.1" 
+    id="timeline-slider"
+    class="w-full h-2 rounded-lg appearance-none cursor-pointer accent-purple-500 bg-white/20"
+  >
+  <div class="flex justify-between text-xs text-white/70 font-mono">
+    <span id="current-time">0:01</span>
+    <span id="total-time">0:43</span>
+  </div>
+</div>
+
+
+            <!-- Controles de Reproducción -->
+            <div class="flex justify-around items-center pt-2">
+                <!-- Shuffle (Barajar) -->
+<button id="btn-shuffle" class="text-white/70 hover:text-white transition-colors p-2 rounded-full" aria-label="Barajar">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle">
+    <polyline points="16 3 21 3 21 8"></polyline>
+    <line x1="4" y1="20" x2="21" y2="3"></line>
+    <polyline points="21 16 21 21 16 21"></polyline>
+    <line x1="15" y1="15" x2="21" y2="21"></line>
+    <line x1="4" y1="4" x2="9" y2="9"></line>
+  </svg>
+</button>
+
+                
+                <!-- Anterior -->
+                <button  id="btn-prev" class="text-white hover:text-purple-300 transition-colors p-2 rounded-full" aria-label="Anterior">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-back"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" x2="5" y1="19" y2="5"/></svg>
+                </button>
+                
+                <!-- Play/Pause (Botón principal) -->
+                <button id="btn-play-pause"  aria-label="Reproducir o pausar">
+                    <!-- Icono inicial de Play -->
+                    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-play"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <!-- Icono de Pause (oculto inicialmente) -->
+                    <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-pause hidden"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>
+                </button>
+                
+                <!-- Siguiente -->
+                <button id="btn-next" class="text-white hover:text-purple-300 transition-colors p-2 rounded-full" aria-label="Siguiente">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-forward"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></svg>
+                </button>
+
+                <!-- Loop (Repetir) -->
+<button id="btn-loop" class="text-white/70 hover:text-white transition-colors p-2 rounded-full" aria-label="Repetir">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat">
+    <polyline points="17 1 21 5 17 9"></polyline>
+    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+    <polyline points="7 23 3 19 7 15"></polyline>
+    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+  </svg>
+</button>
+            </div>
+        </div>
+
+    </div>
+
+      <div class="text-lg leading-relaxed font-light mt-4" style="font-family: 'Comic Sans MS', 'Comic Sans', cursive;">
+        <p class="mb-4">
+          Entre los colores del camino, el tono violeta siempre recuerda la calma y la fortaleza que habitan en los pequeños gestos. Hay personas que, sin decir mucho, logran llenar los días de serenidad y esperanza. Gracias por ser parte de esos momentos que florecen sin prisa, por tu presencia sencilla y por compartir la belleza que nace en lo cotidiano.
+        </p>
+      </div>
+      <p>Has hecho clic en el texto "¡Click Me!" 😄</p>
+<!-- 🖼 Carrusel interactivo -->
+<div class="image-stack w-full mt-8 select-none">
+  <div id="carousel-container" class="carousel-container transition-transform duration-500 ease-out">
+    <div id="img-1" class="image-card"><img src="img/img1.jpeg" alt="Flor morada" class="w-full h-full object-cover"></div>
+    <div id="img-2" class="image-card"><img src="img/img2.jpg" alt="Campo de flores" class="w-full h-full object-cover"></div>
+    <div id="img-3" class="image-card"><img src="img/img3.jpg" alt="Atardecer" class="w-full h-full object-cover"></div>
+    <div id="img-4" class="image-card"><img src="img/img4.jpg" alt="Río o agua" class="w-full h-full object-cover"></div>
+    <div id="img-5" class="image-card"><img src="img/img5.jpg" alt="Galaxia" class="w-full h-full object-cover"></div>
+  </div>
+
+      </div>
+
+      <div class="w-40 bg-transparent text-white text-gray-900 rounded-full py-1.5 text-sm font-semibold mt-6 mx-auto">
+        08/10/25
+      </div>
+      <button id="cerrarModal">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- 🌠 Estrellas -->
+  <script src="anim.js" defer></script>
+    <audio id="bg-music" src="TUPOETAAlexCamposVídeoOficial.mp3" preload="auto" loop></audio>
+  <!-- 🎮 THREE.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
+<script src="modelo3d.js" defer></script>
+<script src="scripts.js" defer></script>
+</body>
+</html>
